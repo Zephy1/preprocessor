@@ -18,7 +18,6 @@ import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ResolvableConfiguration
 import org.gradle.api.file.Directory
-import org.gradle.api.file.RegularFile
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.provider.Property
@@ -77,6 +76,9 @@ class PreprocessPlugin : Plugin<Project> {
         }
 
         val projectMojangMappings = project.configurations.dependencyScope("preprocess-mojangMappings")
+        val resolvableProjectMojangMappings = project.configurations.resolvable("preprocess-mojangMappings-resolver") {
+            extendsFrom(projectMojangMappings.get())
+        }
         if (projectNode.isObfuscated && adjacentNodes.any { !it.isObfuscated }) {
             project.dependencies {
                 projectMojangMappings(project.extensions.getByType<LoomGradleExtensionAPI>().layered {
@@ -240,7 +242,7 @@ class PreprocessPlugin : Plugin<Project> {
                     }
                     val mergeDestinationMappingsTask = tasks.register("mergeDestinationNamedAndMojangMappings", MergeNamedAndMojangMappingsTask::class) {
                         namedMappings.set { projectTinyMappings!! }
-                        mojangMappings.fileProvider(projectMojangMappings.flatMap { it.elements }.map { it.single().asFile })
+                        mojangMappings.fileProvider(resolvableProjectMojangMappings.flatMap { it.elements }.map { it.single().asFile })
                         output.set(project.layout.buildDirectory.get().asFile.resolve("mergedDestinationNamedAndMojangMappings.tiny"))
                     }
                     tasks.withType<PreprocessTask>().configureEach {
