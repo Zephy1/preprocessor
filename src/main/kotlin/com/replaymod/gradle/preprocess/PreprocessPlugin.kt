@@ -617,4 +617,4 @@ private fun String.uppercaseFirstChar() = replaceFirstChar { it.uppercaseChar() 
 private fun Any.maybeGetGroovyProperty(name: String) = withGroovyBuilder { metaClass }.hasProperty(this, name)?.getProperty(this)
 
 private const val KOTLIN_COMPILER_EMBEDDABLE = "org.jetbrains.kotlin:kotlin-compiler-embeddable"
-private const val KOTLIN_COMPILER_VERSION = "2.2.0"
+private const val KOTLIN_COMPILER_VERSION = "2.4.10"

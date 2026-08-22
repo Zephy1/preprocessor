@@ -38,7 +38,7 @@ gradlePlugin {
     }
 }
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 
 tasks.withType<Test> {
     useJUnitPlatform()
@@ -54,13 +54,13 @@ repositories {
 dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
-    implementation("com.github.replaymod:remap:d6af8ab8e") {
+    implementation("com.github.replaymod:remap:651e2e0a2") {
         exclude("org.jetbrains.kotlin", "kotlin-compiler-embeddable")
     }
-    implementation("net.fabricmc:mapping-io:0.6.1")
-    implementation("org.ow2.asm:asm:9.9.1")
+    implementation("net.fabricmc:mapping-io:0.9.1")
+    implementation("org.ow2.asm:asm:9.10.1")
 
-    compileOnly("net.fabricmc:fabric-loom:1.7.4")
+    compileOnly("net.fabricmc:fabric-loom:1.17-SNAPSHOT")
 
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
