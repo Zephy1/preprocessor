@@ -54,13 +54,13 @@ repositories {
 dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
-    implementation("com.github.replaymod:remap:651e2e0a2") {
+    implementation("com.github.replaymod:remap:SNAPSHOT") {
         exclude("org.jetbrains.kotlin", "kotlin-compiler-embeddable")
     }
     implementation("net.fabricmc:mapping-io:0.9.1")
-    implementation("org.ow2.asm:asm:9.10.1")
+    implementation("org.ow2.asm:asm:9.11.1")
 
-    compileOnly("net.fabricmc:fabric-loom:1.17-SNAPSHOT")
+    compileOnly("net.fabricmc:fabric-loom:1.19-SNAPSHOT")
 
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
